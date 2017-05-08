@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+			<meta name="viewport" content="initial-scale=1.0"/>
+		<title>lata的个人主页</title>
+		<link rel="shortcut icon" href="home/favicon.ico" />
+		<link rel="stylesheet" type="text/css" href="/home/css/bootstrap.min.css"/>
+		<script src="/home/js/jquery-1.10.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/home/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+		<!--<link rel="stylesheet" type="text/css" href="/home/css/bootstrap.css"/>-->
+		<style type="text/css">
+			body{padding-top:50px;background-color: #eee;}
+			#tb{margin-bottom:15px;}
+			.own{background-color: #fff;padding-top:15px}
+			.media img {width: 240px;}
+			footer{background-color: #222222;color:#c1cccc;padding:20px;}
+			.own .list-unstyled li{line-height: 26px;}
+			.own .list-unstyled li label{margin-right:5px;}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+			<div class="container">
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-target="#menu" data-toggle="collapse" aria-expanded='true'>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a href="" class="navbar-brand"></a>
+				</div>
+				<div id="menu" class="navbar-collapse collapse" aria-expanded='true'>
+					<ul class="nav navbar-nav">
+						<li><a href="">LATA的博客</a></li>
+						<li class="active"><a href="">首页</a></li>
+						
+						<li><a href=""><%=article[0].category %></a></li>
+						
+					</ul>
+					<form action="" class="navbar-form navbar-right">
+						<div class="input-group">
+							<input type="text" class="form-control" />
+							<div class="input-group-btn">
+								<button class="btn btn-primary">搜索</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</nav>
+		<!--轮播图-->
+		<div class="carousel slide" id="tb">
+			<!--图片区域-->
+			<div class="carousel-inner">
+				<a href="" class="item active"><img src="home/images/baner1.jpg" class="img-responsive"/></a>
+				<a href="" class="item"><img src="home/images/baner2.jpg" alt=""  class="img-responsive"/></a>
+				<a href="" class="item"><img src="home/images/baner3.jpg" alt=""  class="img-responsive"/></a>
+			</div>
+			<!--小角标-->
+			<ul class="carousel-indicators">
+				<li class="active" data-target-to="0" data-target="#tb"></li>
+				<li data-target-to="1" data-target="#tb"></li>
+				<li data-target-to="2" data-target="#tb"></li>
+			</ul>
+			<!--控制按钮-->
+			<a href="#tb" class="left carousel-control" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+			<a href="#tb" class="right carousel-control" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+		</div>
+		
+		<!--媒体对象-->
+		<div class="container own">
+			<div class="row main">
+				<div class="col-md-9 content">
+					<ul class="media-list">
+						<% for(var i=0; i<article.length; i++) { %>
+						<li class="media">
+							<a href="/detail?id=<%=article[i]._id %>" class="media-left"><img src="<%= article[i].cover %>" alt="" /></a>
+							<div class="media-body">
+								<h3><a href="/detail?id=<%=article[i]._id %>"><%=article[i].title %></a></h3>
+								<p> 
+									<span><i class="glyphicon glyphicon-user"></i> mrduan </span>
+									<span><i class="glyphicon glyphicon-time"></i><%=article[i].time.toLocaleString() %> </span>
+									<span><i class="glyphicon glyphicon-eye-open"></i><%=article[i].count == 0 ? 10 : article[i].count %>浏览 </span>
+									<span> <i class="glyphicon glyphicon-comment"></i>评论一下 </span>
+								</p>
+							</div>
+						</li>
+						<% } %>
+					</ul>
+				</div>
+				<div class="col-md-3 sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<p>热门文章</p>
+						</div>
+						<div class="panel-body">
+							<ul class="list-unstyled">
+								<li><label for="" class="label label-danger">1</label>如何为网站和应用创建设计...</li>
+								<li><label for="" class="label label-danger">2</label> 如何为网站和应用创建设计...</li>
+								<li><label for="" class="label label-danger">3</label>如何为网站和应用创建设计...</li>
+								<li><label for="" class="label label-default">4</label> 如何为网站和应用创建设计...</li>
+								<li><label for="" class="label label-default">5</label>如何为网站和应用创建设计...</li>				
+								<li><label for="" class="label label-default">6</label>如何为网站和应用创建设计...</li>				
+								<li><label for="" class="label label-default">7</label>如何为网站和应用创建设计...</li>				
+								<li><label for="" class="label label-default">8</label>如何为网站和应用创建设计...</li>				
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="text-center">
+			<p>版权所有，保留一切权利！ 转载内容版权归作者及来源网站所有，原创内容转载请注明来源。</p>
+			<p>Copyright © 2013-2014 andy, All Rights Reserved.</p>
+		</footer>
+		<script>
+			//自动播放
+			$('.carousel').carousel({
+				interval : 2000
+			});
+			//上一张
+			$('.left').on('click',function(e){
+				$('carousel').carousel('prev')
+			});
+			//下一张
+			$('.right').on('click',function(e){
+				$('carousel').carousel('next')
+			})
+		</script>
+	</body>
+</html>
